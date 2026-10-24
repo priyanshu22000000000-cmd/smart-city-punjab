@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smart Cities Mission in Punjab | LPU CHE110 group project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E8F0EE; --surface:#F6FAF9; --ink:#14262B; --muted:#4C5F63;
+  --canal:#1F7A74; --mustard:#B9850F; --brick:#9C4A2F; --line:#C5D4D1;
+  --soil-1:#C9B48E; --soil-2:#A88D63; --soil-3:#7D6648; --water:#3E9E95;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1A1C; --surface:#152427; --ink:#E3EDEA; --muted:#A3B6B3;
+    --canal:#5CC2B8; --mustard:#E8B93A; --brick:#E3825F; --line:#2A3D40;
+    --soil-1:#5C4E37; --soil-2:#4A3E2C; --soil-3:#372E21; --water:#2F8A82;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1A1C; --surface:#152427; --ink:#E3EDEA; --muted:#A3B6B3;
+  --canal:#5CC2B8; --mustard:#E8B93A; --brick:#E3825F; --line:#2A3D40;
+  --soil-1:#5C4E37; --soil-2:#4A3E2C; --soil-3:#372E21; --water:#2F8A82;
+  color-scheme:dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:1.0625rem;line-height:1.6;}
+h1,h2,h3{font-family:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;font-weight:800;line-height:1.02;margin:0;letter-spacing:.005em;}
+h2{font-size:clamp(2rem,6vw,3rem);margin-bottom:.6rem;}
+h3{font-size:1.6rem;font-weight:600;}
+p{margin:0 0 1rem;}
+a{color:var(--canal);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--mustard);outline-offset:3px;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.25rem;}
+.narrow > *{max-width:700px;}
+section{padding:4.5rem 0;border-top:1px solid var(--line);}
+.lede{font-size:1.2rem;color:var(--muted);max-width:62ch;}
+
+/* HERO: a borehole cross-section */
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:2.5rem;align-items:stretch;padding:3.5rem 0 4rem;}
+.hero .credit{font-size:.95rem;color:var(--muted);margin-bottom:1.5rem;}
+.hero h1{font-size:clamp(2.8rem,8.5vw,5.6rem);margin-bottom:1.2rem;}
+.hero h1 span{display:block;color:var(--canal);}
+.hero .q{font-size:1.25rem;max-width:34ch;margin-bottom:1.75rem;}
+.btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--canal);color:var(--bg);font-weight:700;text-decoration:none;padding:.9rem 1.4rem;border-radius:999px;font-size:1.05rem;}
+.btn:hover{filter:brightness(1.08);}
+.btn svg{width:1.2rem;height:1.2rem;}
+.bore{position:relative;border-radius:18px;overflow:hidden;min-height:420px;background:linear-gradient(var(--soil-1) 0 22%,var(--soil-2) 22% 52%,var(--soil-3) 52% 100%);}
+.bore .ground{position:absolute;top:0;left:0;right:0;height:26px;background:var(--canal);opacity:.85;}
+.bore .pipe{position:absolute;left:50%;top:0;width:18px;transform:translateX(-50%);height:88%;background:linear-gradient(90deg,#6d7f82,#b9c7c8,#6d7f82);border-radius:0 0 4px 4px;}
+.bore .tableline{position:absolute;left:0;right:0;top:12%;height:0;border-top:3px dashed var(--water);animation:sink 2.6s cubic-bezier(.45,.05,.3,1) .4s forwards;}
+.bore .waterbody{position:absolute;left:0;right:0;bottom:0;top:12%;background:color-mix(in srgb,var(--water) 55%,transparent);animation:drain 2.6s cubic-bezier(.45,.05,.3,1) .4s forwards;}
+.bore .tag{position:absolute;right:12px;background:var(--surface);color:var(--ink);font-size:.85rem;padding:.35rem .6rem;border-radius:8px;line-height:1.3;}
+.bore .tag.top{top:34px;}
+.bore .tag.deep{bottom:14px;left:12px;right:auto;max-width:15rem;}
+.bore .tag b{font-family:"Big Shoulders Display",sans-serif;font-size:1.5rem;display:block;}
+@keyframes sink{to{top:72%;}}
+@keyframes drain{to{top:72%;}}
+@media (prefers-reduced-motion:reduce){.bore .tableline,.bore .waterbody{animation:none;top:72%;}}
+
+/* figures */
+.figures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:2rem;}
+.figures div{background:var(--surface);padding:1.25rem;}
+.figures b{display:block;font-family:"Big Shoulders Display",sans-serif;font-size:2.4rem;line-height:1;color:var(--ink);}
+.figures span{font-size:.95rem;color:var(--muted);}
+
+/* timeline */
+.timeline{list-style:none;margin:2rem 0 0;padding:0;border-left:3px solid var(--line);}
+.timeline li{position:relative;padding:0 0 1.4rem 1.5rem;}
+.timeline li::before{content:"";position:absolute;left:-9px;top:.35rem;width:15px;height:15px;border-radius:50%;background:var(--bg);border:3px solid var(--canal);}
+.timeline time{font-weight:700;display:block;}
+.timeline .end::before{background:var(--brick);border-color:var(--brick);}
+
+/* scorecard */
+.scroll{overflow-x:auto;margin-top:2rem;border:1px solid var(--line);border-radius:14px;background:var(--surface);}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:.98rem;}
+th,td{text-align:left;vertical-align:top;padding:.9rem 1rem;border-bottom:1px solid var(--line);}
+thead th{font-family:"Big Shoulders Display",sans-serif;font-size:1.7rem;font-weight:800;}
+tbody th{font-weight:700;color:var(--muted);width:9.5rem;}
+tr:last-child th,tr:last-child td{border-bottom:none;}
+.rank{font-family:"Big Shoulders Display",sans-serif;font-size:2rem;font-weight:800;line-height:1;}
+.bad{color:var(--brick);}
+
+/* deadline tracker */
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:2rem 0;}
+.flow div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.1rem;}
+.flow b{font-family:"Big Shoulders Display",sans-serif;font-size:1.9rem;display:block;line-height:1.05;}
+.deadlines{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-top:1.5rem;}
+.deadlines s{color:var(--brick);font-weight:700;font-size:1.15rem;}
+.deadlines .now{background:var(--mustard);color:#1b1503;font-weight:700;padding:.45rem .8rem;border-radius:999px;}
+.meter{height:14px;background:var(--line);border-radius:999px;overflow:hidden;margin:.6rem 0 .3rem;max-width:520px;}
+.meter i{display:block;height:100%;width:90%;background:var(--canal);}
+
+/* environment */
+.env{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 3rem;margin-top:2rem;}
+.env h3{margin-bottom:.4rem;}
+.env .big{font-family:"Big Shoulders Display",sans-serif;font-size:3rem;font-weight:800;line-height:1;color:var(--brick);display:block;margin-bottom:.4rem;}
+
+/* actions */
+.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 2.5rem;margin-top:1.5rem;padding:0;list-style:none;}
+.actions li{padding-left:1.8rem;position:relative;}
+.actions li::before{content:"";position:absolute;left:0;top:.45rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--canal);}
+
+/* reach */
+.reach{background:var(--canal);color:var(--bg);}
+.reach h2,.reach .lede{color:var(--bg);}
+.reach .lede{opacity:.9;}
+.reachnums{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1.5rem;margin-top:2rem;}
+.reachnums b{font-family:"Big Shoulders Display",sans-serif;font-size:3rem;display:block;line-height:1;}
+.reach .btn{background:var(--bg);color:var(--canal);margin-top:2rem;}
+
+.sources{columns:2;column-gap:2.5rem;padding-left:1.2rem;font-size:.95rem;}
+.sources li{margin-bottom:.6rem;break-inside:avoid;}
+footer{padding:3rem 0 4rem;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;}
+footer strong{color:var(--ink);}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;padding-top:2.5rem;}
+  .bore{min-height:320px;}
+  .figures{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .flow{grid-template-columns:1fr;}
+  .env,.actions{grid-template-columns:1fr;}
+  .reachnums{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .sources{columns:1;}
+  section{padding:3.25rem 0;}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="hero">
+    <div>
+      <p class="credit">Lovely Professional University, CHE110 Environmental Studies, Section K3P26BU</p>
+      <h1>Jalandhar is drinking from a well <span>that’s running dry.</span></h1>
+      <p class="q">Ten years and ₹4,485 crore later, did India’s Smart Cities Mission actually fix Punjab’s cities? Here’s what Amritsar, Ludhiana and Jalandhar got, and what’s still missing.</p>
+      <a class="btn" href="https://www.instagram.com/reel/DetX79uxyed/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        Watch our video on Instagram
+      </a>
+    </div>
+    <div class="bore" role="img" aria-label="Cross-section of the ground under Jalandhar: the water table sits about 40 metres down and falls about one metre every year.">
+      <div class="ground"></div>
+      <div class="waterbody"></div>
+      <div class="tableline"></div>
+      <div class="pipe"></div>
+      <div class="tag top">Ground level</div>
+      <div class="tag deep"><b>~40 m down</b>Jalandhar’s water table, falling about 1 m every year</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap">
+    <h2>Punjab’s smart cities, in four numbers</h2>
+    <p class="lede">Punjab won three places in the national mission. Here’s where things stood by March 2026, according to the Housing Ministry’s reply in the Rajya Sabha.</p>
+    <div class="figures">
+      <div><b>3</b><span>smart cities: Amritsar, Ludhiana, Jalandhar</span></div>
+      <div><b>204</b><span>projects sanctioned</span></div>
+      <div><b>₹4,485 cr</b><span>total project value</span></div>
+      <div><b>190</b><span>projects completed by March 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap narrow">
+    <h2>What the mission was</h2>
+    <p class="lede">The Smart Cities Mission picked 100 Indian cities. Each set up a company, a Special Purpose Vehicle, to rebuild one model zone and add city-wide technology like integrated command and control centres.</p>
+    <ol class="timeline">
+      <li><time>25 June 2015</time>Mission launched for 100 cities.</li>
+      <li><time>January 2016</time>Ludhiana selected in the first round.</li>
+      <li><time>September 2016</time>Jalandhar and Amritsar selected; Amritsar was proposed by the state in place of Mohali.</li>
+      <li><time>2020 to 2024</time>Planned as a five-year programme, the deadline was extended three times.</li>
+      <li class="end"><time>31 March 2025</time>Mission formally closed. Only 18 of the 100 cities had finished every project.</li>
+      <li><time>31 March 2026</time>Nationally, 7,790 of 8,064 projects (97%) complete.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>City scorecard</h2>
+    <p class="lede">Ranks are from the Housing Ministry’s last city ranking, out of 100. Swipe the table sideways on a phone.</p>
+    <div class="scroll" tabindex="0" aria-label="Scorecard comparing Amritsar, Ludhiana and Jalandhar">
+      <table>
+        <thead><tr><td></td><th scope="col">Ludhiana</th><th scope="col">Amritsar</th><th scope="col">Jalandhar</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">National rank</th><td><span class="rank">49</span></td><td><span class="rank">53</span></td><td><span class="rank">62</span></td></tr>
+          <tr><th scope="row">Projects</th><td>82 (74 done by March 2026)</td><td>44</td><td>78</td></tr>
+          <tr><th scope="row">Value</th><td>₹1,388 crore</td><td>₹1,911 crore</td><td>₹1,186 crore</td></tr>
+          <tr><th scope="row">Biggest win</th><td>Over 1.05 lakh smart LED streetlights. The corporation reports use falling from about 341 to 125 million units, saving around ₹2 crore a month.</td><td>A 440 million litre a day water treatment plant at Vallah, fed by the Upper Bari Doab Canal.</td><td>About 1,000 CCTV cameras at 180 locations feeding a command centre that also tracks air quality; smart classrooms in 141 government schools; solar on 17 government buildings.</td></tr>
+          <tr><th scope="row">Biggest worry</th><td class="bad">Buddha Nullah and the Sutlej were more polluted in 2024 than in 2022, despite a clean-up worth about ₹840 crore.</td><td class="bad">In the urban block, groundwater extraction has crossed 300% of recharge.</td><td class="bad">The canal-water project has missed three deadlines, and the Wariana dump still holds about 20 lakh tonnes of waste.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Jalandhar’s water project tracker</h2>
+    <p class="lede">Jalandhar has depended entirely on groundwater. The plan is to switch the city to treated canal water so the ground can recover.</p>
+    <div class="flow">
+      <div><b>Bist Doab Canal</b>Water is drawn from the canal.</div>
+      <div><b>275 MLD plant</b>It’s cleaned at a treatment plant at Adampur.</div>
+      <div><b>400 of 535</b>tubewells can then be switched off across the city.</div>
+    </div>
+    <p><strong>Missed deadlines</strong></p>
+    <div class="deadlines" aria-label="Deadlines missed: March 2025, August 2025, December 2025. New target: 31 December 2026.">
+      <s>March 2025</s><s>August 2025</s><s>December 2025</s><span class="now">New target: 31 December 2026</span>
+    </div>
+    <p style="margin-top:1.5rem"><strong>About 90% complete</strong>, as reported by officials in October 2026.</p>
+    <div class="meter" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The environmental lens</h2>
+    <p class="lede">Smart city projects are judged by what they do for water, waste and air, not just by how many are finished.</p>
+    <div class="env">
+      <div><span class="big">20 lakh t</span><h3>Wariana dump, Jalandhar</h3><p>An estimated 20 lakh tonnes of old waste, about 50 metres high. The Punjab Pollution Control Board flagged groundwater risks before the National Green Tribunal, which ordered a fresh inspection in August 2026. In one six-month period, 75,000 tonnes were cleared while about 50,000 tonnes of fresh waste arrived.</p></div>
+      <div><span class="big">300%</span><h3>Amritsar’s groundwater</h3><p>In Amritsar’s urban block, people pull out more than three times the groundwater that rain puts back. That’s why the canal-water plant at Vallah matters.</p></div>
+      <div><span class="big">2024 &gt; 2022</span><h3>Buddha Nullah and the Sutlej</h3><p>The Central Pollution Control Board found the water worse in 2024 than in 2022, despite a rejuvenation project worth about ₹840 crore.</p></div>
+      <div><span class="big">AQI 294</span><h3>Jalandhar’s air</h3><p>Dug-up roads for unfinished projects added dust, and the city’s air quality index touched 294, which is classed as very poor.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap narrow">
+    <h2>Problems and what comes next</h2>
+    <p>Delays are the common thread. In a 2024 budget debate, Rajya Sabha member Vikramjit Singh Sahney said only 5 of 72 work orders in Punjab’s smart cities had been completed. Leaders across parties have sought inquiries into alleged irregularities in Jalandhar, and the Centre sought a report. Allegations are not findings until proven, but residents still report potholes, garbage and broken streetlights.</p>
+    <p>Now that the mission has closed, the Housing Ministry has asked states to finish pending works, plan long-term maintenance, repurpose the Special Purpose Vehicles and keep command centres running.</p>
+    <p>The next big source of money is the <strong>Urban Challenge Fund</strong>: ₹1 lakh crore, approved by the Union Cabinet in February 2026. It covers 25% of a project’s cost if the city raises at least half from the market. The future favours cities that can plan, finance and maintain, not just build.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>A smart city starts with you</h2>
+    <p class="lede">Sustainable Development Goal 11 calls for sustainable cities. These are things anyone can do today.</p>
+    <ul class="actions">
+      <li>Separate wet and dry waste at home, so less ends up on dumps like Wariana.</li>
+      <li>Save water: fix leaks, turn off running taps, and harvest rainwater where you can.</li>
+      <li>Report broken streetlights, potholes and garbage to your municipal corporation.</li>
+      <li>Ask where public money went. Projects improve when citizens follow up.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="reach">
+  <div class="wrap">
+    <h2>Our video’s reach</h2>
+    <p class="lede">Our AI-made documentary on Instagram, as of 24 October 2026.</p>
+    <div class="reachnums">
+      <div><b>4.7k</b>views</div>
+      <div><b>155</b>likes</div>
+      <div><b>73</b>comments</div>
+      <div><b>360</b>shares</div>
+      <div><b>12.5%</b>engagement rate</div>
+    </div>
+    <a class="btn" href="https://www.instagram.com/reel/DetX79uxyed/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      Watch the video
+    </a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Sources</h2>
+    <ol class="sources">
+      <li>Press Information Bureau (2025). <a href="https://www.pib.gov.in/PressNoteDetails.aspx?id=154736&NoteId=154736&ModuleId=3" target="_blank" rel="noopener">10 Years of Smart Cities Mission</a>.</li>
+      <li>ETV Bharat (4 Aug 2026). <a href="https://www.etvbharat.com/en/bharat/smart-cities-mission-nears-completion-with-97-percent-projects-executed-but-performance-varies-across-cities-enn26080404183" target="_blank" rel="noopener">Smart Cities Mission nears completion; 97% projects executed</a>.</li>
+      <li>5 Dariya News (31 Jul 2026). <a href="https://www.5dariyanews.com/amp/496659-Modi-government-has-allocated-%E2%82%B94485-crore-for-three-smart-cities-in-Punjab-says-Tarun-Chugh" target="_blank" rel="noopener">MoHUA Rajya Sabha reply on Punjab’s three smart cities</a>.</li>
+      <li>Business Standard (30 Mar 2025). <a href="https://www.business-standard.com/economy/news/smart-cities-mission-deadline-ends-on-march-31-targets-remain-unmet-125033000775_1.html" target="_blank" rel="noopener">Smart Cities Mission deadline ends; targets remain unmet</a>.</li>
+      <li>The Tribune (8 Dec 2024). <a href="https://www.tribuneindia.com/news/in-depth/smart-city-mess/" target="_blank" rel="noopener">Smart City mess</a>.</li>
+      <li>Cities Development Initiative for Asia. <a href="https://cdia.asia/project/jalandhar-surface-water-supply-system/" target="_blank" rel="noopener">Jalandhar surface water supply system</a>.</li>
+      <li>Punjabi Jagran (8 Oct 2026). <a href="https://www.punjabijagran.com/punjab/jalandhar-surface-water-system-project-to-be-completed-by-december-31-corporation-commissioner-9694696.html" target="_blank" rel="noopener">Surface water project to be completed by 31 December</a>.</li>
+      <li>The Tribune (2025). <a href="https://www.tribuneindia.com/news/jalandhar/smart-city-project-date-extended" target="_blank" rel="noopener">Smart city project date extended</a>.</li>
+      <li>The Tribune (2026). <a href="https://www.tribuneindia.com/news/jalandhar/jalandhars-wariana-dumpsite-flouting-rules-ppcb-in-ngt-affidavit/" target="_blank" rel="noopener">Wariana dumpsite flouting rules, PPCB in NGT affidavit</a>.</li>
+      <li>The Tribune (2026). <a href="https://www.tribuneindia.com/news/jalandhar/ngt-directs-fresh-inspection-of-wariana-dumpsite-in-jalandhar/" target="_blank" rel="noopener">NGT directs fresh inspection of Wariana dumpsite</a>.</li>
+      <li>The Tribune (2024). <a href="https://www.tribuneindia.com/news/ludhiana/centre-raises-questions-over-840-cr-buddha-nullah-rejuvenation-project" target="_blank" rel="noopener">Centre raises questions over ₹840-crore Buddha Nullah project</a>.</li>
+      <li>The Tribune. <a href="https://www.tribuneindia.com/news/ludhiana/energy-saver-mc-cuts-street-light-electricity-bills-by-158-cr-588294" target="_blank" rel="noopener">Ludhiana MC cuts street light electricity bills</a>.</li>
+      <li>The Tribune. <a href="https://www.tribuneindia.com/news/amritsar/awareness-walkathon-highlights-need-for-water-conservation-in-amritsar/" target="_blank" rel="noopener">Need for water conservation in Amritsar</a>.</li>
+      <li>The Tribune (2024). <a href="https://www.tribuneindia.com/news/punjab/in-parliament-smart-city-projects-moving-at-tardy-pace-says-sahney/amp" target="_blank" rel="noopener">Smart City projects moving at tardy pace, says Sahney</a>.</li>
+      <li>Prime Minister’s Office (14 Feb 2026). <a href="https://www.pmindia.gov.in/en/news_updates/cabinet-approves-rs-one-lakh-crore-urban-challenge-fund-to-drive-market-led-urban-transformation/" target="_blank" rel="noopener">Cabinet approves ₹1 lakh crore Urban Challenge Fund</a>.</li>
+    </ol>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>A group project by Priyanshu, Aditya Singh and Supandeep Singh</strong><br>
+    CHE110 Environmental Studies, Academic Task 1, Section K3P26BU, Lovely Professional University, 2026.</p>
+    <p>All figures come from the published sources listed above. The video was made with AI tools from our own researched script.</p>
+  </div>
+</footer>
+</body>
+</html>
